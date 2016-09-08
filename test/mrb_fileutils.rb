@@ -15,9 +15,8 @@ assert("FileUtils#pwd") do
 end
 
 assert("FileUtils#cd") do
-  FileUtils.cd('/tmp', {verbose: true}) do
-    assert_equal File.realpath('/tmp'), File.realpath(FileUtils.pwd)
-  end
+  FileUtils.cd '/tmp', {verbose: true}
+  assert_equal File.realpath('/tmp'), FileUtils.pwd
 end
 
 assert("FileUtils#uptodate?") do
