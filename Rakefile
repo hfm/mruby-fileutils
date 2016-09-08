@@ -14,17 +14,17 @@ end
 
 desc "compile binary"
 task :compile => :mruby do
-  sh "cd mruby && MRUBY_CONFIG=#{MRUBY_CONFIG} rake all"
+  Dir.chdir('mruby') { sh "MRUBY_CONFIG=#{MRUBY_CONFIG} rake all" }
 end
 
 desc "test"
 task :test => :mruby do
-  sh "cd mruby && MRUBY_CONFIG=#{MRUBY_CONFIG} rake all test"
+  Dir.chdir('mruby') { sh "MRUBY_CONFIG=#{MRUBY_CONFIG} rake all test" }
 end
 
 desc "cleanup"
 task :clean do
-  sh "cd mruby && rake deep_clean"
+  Dir.chdir('mruby') { sh "rake deep_clean" }
 end
 
 task :default => :compile
