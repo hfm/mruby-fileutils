@@ -29,6 +29,21 @@ module FileUtils
   end
   module_function :uptodate?
 
+  def mkdir(list, options = {})
+    list = [list].flatten.map{|path| File.path(path)}
+    _output_message "mkdir #{options[:mode] ? ('-m %03o ' % options[:mode]) : ''}#{list.join ' '}" if options[:verbose]
+    return if options[:noop]
+
+    list.each do |dir|
+      if options[:mode]
+        Dir.mkdir dir, options[:mode]
+      else
+        Dir.mkdir dir
+      end
+    end
+  end
+  module_function :mkdir
+
   def self._output_message(msg)
     $stderr.puts msg
   end

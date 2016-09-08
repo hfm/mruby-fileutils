@@ -25,7 +25,7 @@ end
 | ------------------------- | --------------- | ---- |
 | FileUtils.#cd             | o               |      |
 | FileUtils.#pwd            | o               |      |
-| FileUtils.#mkdir          |                 |      |
+| FileUtils.#mkdir          | o               |      |
 | FileUtils.#mkdir_p        |                 |      |
 | FileUtils.#rmdir          |                 |      |
 | FileUtils.#ln             |                 |      |

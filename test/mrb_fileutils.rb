@@ -30,3 +30,21 @@ assert("FileUtils#uptodate?") do
   assert_false FileUtils.uptodate?(newpath, [oldpath, newpath])
 end
 
+assert("FileUtils#mkdir") do
+  FileUtils.cd(Dir.tmpdir, {verbose: true})
+  suffix = SecureRandom.hex
+  test, tmp, data = %w(test tmp data).map {|d| "#{d}_#{suffix}"}
+
+  FileUtils.mkdir test, {verbose: true}
+  assert_true Dir.exists? test
+
+  FileUtils.mkdir [tmp, data], {verbose: true}
+  assert_true Dir.exists? tmp
+  assert_true Dir.exists? data
+
+  [test, tmp, data].each {|d| Dir.delete d}
+
+  FileUtils.mkdir test, {verbose: true, mode: 0700}
+  assert_equal "40700", sprintf("%o", File.stat(test).mode)
+  Dir.delete test
+end
