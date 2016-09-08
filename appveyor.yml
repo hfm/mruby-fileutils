@@ -8,4 +8,4 @@ install:
   - git clone --depth=1 git://github.com/mruby/mruby.git ../mruby
   - cd ../mruby
 build_script:
-- rake \.minirake all test --trace --verbose
+- ruby \.minirake all test --trace --verbose
