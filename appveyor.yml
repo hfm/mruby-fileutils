@@ -1,0 +1,6 @@
+version: '{build}'
+clone_depth: 1
+environment:
+  MRUBY_CONFIG: C:\projects\mruby-fileutils\.travis_build_config.rb
+build_script:
+- ruby \.minirake test --trace --verbose
