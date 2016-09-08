@@ -23,7 +23,7 @@ end
 
 | method                    | mruby-fileutils | memo |
 | ------------------------- | --------------- | ---- |
-| FileUtils.#cd             |                 |      |
+| FileUtils.#cd             | o               |      |
 | FileUtils.#pwd            | o               |      |
 | FileUtils.#mkdir          |                 |      |
 | FileUtils.#mkdir_p        |                 |      |
