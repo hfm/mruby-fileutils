@@ -18,3 +18,13 @@ assert("FileUtils#cd") do
   FileUtils.cd '/tmp', {verbose: true}
   assert_equal File.realpath('/tmp'), FileUtils.pwd
 end
+
+assert("FileUtils#uptodate?") do
+  old = `mktemp /tmp/fileutils.XXXXXXXX`.chomp
+  sleep 1
+  new = `mktemp /tmp/fileutils.XXXXXXXX`.chomp
+
+  assert_true FileUtils.uptodate?(new, [old])
+  assert_false FileUtils.uptodate?(new, [old, new])
+end
+

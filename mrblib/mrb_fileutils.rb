@@ -17,6 +17,18 @@ module FileUtils
   alias chdir cd
   module_function :chdir
 
+  def uptodate?(new, old_list)
+    return false unless File.exist?(new)
+    new_time = File.stat(new).mtime
+    old_list.each do |old|
+      if File.exist?(old)
+        return false unless new_time > File.stat(old).mtime
+      end
+    end
+    true
+  end
+  module_function :uptodate?
+
   def self._output_message(msg)
     $stderr.puts msg
   end

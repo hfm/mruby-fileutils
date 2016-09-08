@@ -56,7 +56,7 @@ There are some 'low level' methods:
 | FileUtils.#remove_file         |                 |      |
 | FileUtils.#compare_file        |                 |      |
 | FileUtils.#compare_stream      |                 |      |
-| FileUtils.#uptodate?           |                 |      |
+| FileUtils.#uptodate?           | o               |      |
 
 ## License
 under the MIT License:
