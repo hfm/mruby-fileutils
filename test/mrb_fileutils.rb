@@ -20,11 +20,13 @@ assert("FileUtils#cd") do
 end
 
 assert("FileUtils#uptodate?") do
-  old = `mktemp /tmp/fileutils.XXXXXXXX`.chomp
+  old = Tempfile.new 'old'
+  oldpath = old.path
   sleep 1
-  new = `mktemp /tmp/fileutils.XXXXXXXX`.chomp
+  new = Tempfile.new 'new'
+  newpath = new.path
 
-  assert_true FileUtils.uptodate?(new, [old])
-  assert_false FileUtils.uptodate?(new, [old, new])
+  assert_true FileUtils.uptodate?(newpath, [oldpath])
+  assert_false FileUtils.uptodate?(newpath, [oldpath, newpath])
 end
 
