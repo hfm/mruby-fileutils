@@ -6,7 +6,8 @@ file :mruby do
   if MRUBY_VERSION != 'master'
     Dir.chdir('mruby') do
       sh "git fetch --tags"
-      sh "git checkout $(git rev-parse #{MRUBY_VERSION})"
+      rev = `git rev-parse #{MRUBY_VERSION}`
+      sh "git checkout #{rev}"
     end
   end
 end
