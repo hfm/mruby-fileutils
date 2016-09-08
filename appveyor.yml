@@ -2,6 +2,8 @@ version: '{build}'
 clone_depth: 1
 environment:
   MRUBY_CONFIG: C:\projects\mruby-fileutils\.travis_build_config.rb
+init:
+  - set PATH=%PATH%;C:\cygwin\bin;
 install:
   - git clone --depth=1 git://github.com/mruby/mruby.git ../mruby
   - cd ../mruby
