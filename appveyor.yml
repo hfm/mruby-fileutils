@@ -1,0 +1,10 @@
+version: '{build}'
+clone_depth: 1
+environment:
+  matrix:
+  - MRUBY_VERSION: 1.2.0
+  - MRUBY_VERSION: master
+init:
+  - set PATH=%PATH%;C:\cygwin\bin;
+build_script:
+- rake test --trace --verbose
