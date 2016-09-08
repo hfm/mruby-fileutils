@@ -5,4 +5,4 @@ environment:
 init:
   - set PATH=%PATH%;C:\cygwin\bin;
 build_script:
-- ruby \.minirake test --trace --verbose
+- rake test --trace --verbose
