@@ -5,6 +5,6 @@ environment:
   - MRUBY_VERSION: 1.2.0
   - MRUBY_VERSION: master
 init:
-  - set PATH=%PATH%;C:\cygwin\bin;
+  - set PATH=C:\MinGW\bin;C:\MinGW\msys\1.0\bin;%PATH%
 build_script:
 - rake test --trace --verbose
