@@ -4,6 +4,7 @@ environment:
   matrix:
   - MRUBY_VERSION: 1.2.0
   - MRUBY_VERSION: master
+  Compiler: mingw
 init:
   - set PATH=C:\MinGW\bin;C:\MinGW\msys\1.0\bin;%PATH%
 build_script:
