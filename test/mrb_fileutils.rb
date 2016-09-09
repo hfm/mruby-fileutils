@@ -31,7 +31,7 @@ assert("FileUtils#uptodate?") do
 end
 
 assert("FileUtils#mkdir") do
-  FileUtils.cd(Dir.tmpdir, {verbose: true})
+  FileUtils.cd Dir.tmpdir
   suffix = SecureRandom.hex
   test, tmp, data = %w(test tmp data).map {|d| "#{d}_#{suffix}"}
 
@@ -47,4 +47,22 @@ assert("FileUtils#mkdir") do
   FileUtils.mkdir test, {verbose: true, mode: 0700}
   assert_equal "40700", sprintf("%o", File.stat(test).mode)
   Dir.delete test
+end
+
+assert("FileUtils#mkdir_p") do
+  FileUtils.cd Dir.tmpdir
+  path1 = File.join('mkdir_p', SecureRandom.hex.each_char.each_slice(8).map(&:join).join(File::SEPARATOR))
+
+  FileUtils.mkdir_p path1, {verbose: true}
+  assert_true Dir.exists? path1
+  Dir.delete path1
+
+  FileUtils.mkdir_p path1, {verbose: true, mode: 0700}
+  assert_equal "40700", sprintf("%o", File.stat(path1).mode)
+  Dir.delete path1
+
+  path2 = File.join('mkdir_p', SecureRandom.hex.each_char.each_slice(8).map(&:join).join(File::SEPARATOR))
+  FileUtils.mkdir_p [path1, path2], {verbose: true}
+  assert_true Dir.exists? path1
+  assert_true Dir.exists? path2
 end

@@ -44,7 +44,55 @@ module FileUtils
   end
   module_function :mkdir
 
+  def mkdir_p(list, options = {})
+    list = [list].flatten.map{|path| File.path(path)}
+    _output_message "mkdir -p #{options[:mode] ? ('-m %03o ' % options[:mode]) : ''}#{list.join ' '}" if options[:verbose]
+    return *list if options[:noop]
+
+    list.map {|path| _remove_trailing_slash(path)}.each do |path|
+      begin
+        if options[:mode]
+          Dir.mkdir dir, options[:mode]
+        else
+          Dir.mkdir dir
+        end
+        next
+      rescue
+        next if Dir.exists? path
+      end
+
+      stack = []
+      until path == stack.last
+        stack.push path
+        path = File.dirname(path)
+      end
+      stack.reverse_each do |dir|
+        begin
+          if options[:mode]
+            Dir.mkdir dir, options[:mode]
+          else
+            Dir.mkdir dir
+          end
+        rescue
+          raise unless Dir.exists? dir
+        end
+      end
+    end
+
+    return *list
+  end
+  module_function :mkdir_p
+
+  alias mkpath    mkdir_p
+  alias makedirs  mkdir_p
+  module_function :mkpath
+  module_function :makedirs
+
   def self._output_message(msg)
     $stderr.puts msg
+  end
+
+  def self._remove_trailing_slash(dir)
+    dir == '/' ? dir : dir.chomp(?/)
   end
 end
