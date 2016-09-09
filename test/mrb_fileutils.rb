@@ -59,10 +59,10 @@ assert("FileUtils#mkdir_p") do
 
   FileUtils.mkdir_p path1, {verbose: true, mode: 0700}
   assert_equal "40700", sprintf("%o", File.stat(path1).mode)
+  Dir.delete path1
 
   path2 = File.join('mkdir_p', SecureRandom.hex.each_char.each_slice(8).map(&:join).join(File::SEPARATOR))
   FileUtils.mkdir_p [path1, path2], {verbose: true}
   assert_true Dir.exists? path1
   assert_true Dir.exists? path2
-  [path1, path2].each {|d| Dir.delete d}
 end
