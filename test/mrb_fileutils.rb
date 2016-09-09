@@ -66,3 +66,13 @@ assert("FileUtils#mkdir_p") do
   assert_true Dir.exists? path1
   assert_true Dir.exists? path2
 end
+
+assert("FileUtils#rmdir") do
+  path = "rmdir_#{SecureRandom.hex}"
+
+  FileUtils.mkdir path, {verbose: true}
+  assert_true Dir.exists? path
+
+  FileUtils.rmdir rmdir, {verbose: true}
+  assert_false Dir.exists? path
+end
