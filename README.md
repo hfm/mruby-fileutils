@@ -27,7 +27,7 @@ end
 | FileUtils.#pwd            | o               |      |
 | FileUtils.#mkdir          | o               |      |
 | FileUtils.#mkdir_p        | o               |      |
-| FileUtils.#rmdir          |                 |      |
+| FileUtils.#rmdir          | o               |      |
 | FileUtils.#ln             |                 |      |
 | FileUtils.#ln_s           |                 |      |
 | FileUtils.#ln_sf          |                 |      |
