@@ -28,8 +28,8 @@ end
 | FileUtils.#mkdir          | o               |      |
 | FileUtils.#mkdir_p        | o               |      |
 | FileUtils.#rmdir          | o               |      |
-| FileUtils.#ln             |                 |      |
-| FileUtils.#ln_s           |                 |      |
+| FileUtils.#ln             | o               |      |
+| FileUtils.#ln_s           | o               |      |
 | FileUtils.#ln_sf          |                 |      |
 | FileUtils.#cp             |                 |      |
 | FileUtils.#cp_r           |                 |      |
