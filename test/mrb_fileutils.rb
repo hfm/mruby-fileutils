@@ -66,3 +66,19 @@ assert("FileUtils#mkdir_p") do
   assert_true Dir.exists? path1
   assert_true Dir.exists? path2
 end
+
+assert("FileUtils#rmdir") do
+  path = "rmdir_#{SecureRandom.hex}"
+
+  FileUtils.mkdir path, {verbose: true}
+  assert_true Dir.exists? path
+
+  FileUtils.rmdir path, {verbose: true}
+  assert_false Dir.exists? path
+
+  path_depth = File.join(path, SecureRandom.hex.each_char.each_slice(8).map(&:join).join(File::SEPARATOR))
+  FileUtils.mkdir_p path_depth, {verbose: true}
+  FileUtils.rmdir path_depth, {verbose: true, parents: true}
+
+  assert_false Dir.exist? path
+end

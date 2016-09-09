@@ -88,6 +88,23 @@ module FileUtils
   module_function :mkpath
   module_function :makedirs
 
+  def rmdir(list, options = {})
+    list = [list].flatten.map{|path| File.path(path)}
+    parents = options[:parents]
+    _output_message "rmdir #{parents ? '-p ' : ''}#{list.join ' '}" if options[:verbose]
+    return if options[:noop]
+    list.each do |dir|
+      Dir.rmdir(dir = _remove_trailing_slash(dir)) if Dir.exists? dir
+      if parents
+        until (parent = File.dirname(dir)) == '.' or parent == dir
+          dir = parent
+          Dir.rmdir(dir) if Dir.exists? dir
+        end
+      end
+    end
+  end
+  module_function :rmdir
+
   def self._output_message(msg)
     $stderr.puts msg
   end
